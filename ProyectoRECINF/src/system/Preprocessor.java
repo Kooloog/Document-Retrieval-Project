@@ -2,7 +2,6 @@ package system;
 
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.HashSet;
 
 import filters.*;
 
@@ -19,14 +18,14 @@ public class Preprocessor {
 		filters.add(new CharacterRemovalFilter("\\s{2,}", " "));
 	}
 	
-	public static HashSet<String> preprocess(String fileContent) {
-		HashSet<String> fileIndexTerms;
+	public static ArrayList<String> preprocess(String fileContent) {
+		ArrayList<String> fileIndexTerms;
 		
 		for(Filter filter : filters) {
 			fileContent = filter.execute(fileContent);
 		}
 		
-		fileIndexTerms = new HashSet<String>(Arrays.asList(fileContent.split("\\s")));
+		fileIndexTerms = new ArrayList<String>(Arrays.asList(fileContent.split("\\s")));
 		return fileIndexTerms;
 	}
 }
