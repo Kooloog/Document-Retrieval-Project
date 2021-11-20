@@ -7,14 +7,14 @@ import java.io.IOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.Properties;
-import system.DecodeList;
+import system.ContainerDecoder;
 
 public class calculateTF {
 	public static HashMap<String, ArrayList<String>> documentTerms = 
 			  new HashMap<String, ArrayList<String>>();
 	
-	public static HashMap<String, HashMap<String, Integer>> termTFs =
-			new HashMap<String, HashMap<String, Integer>>();
+	public static HashMap<String, HashMap<String, Double>> termTFs =
+			new HashMap<String, HashMap<String, Double>>();
 	
 	public static void main(String[] args) {
 		System.out.println("Reading documentAndTerms.txt...");
@@ -24,11 +24,11 @@ public class calculateTF {
 			properties.load(new FileInputStream("infofiles/documentsAndTerms.txt"));
 			
 			for (String key : properties.stringPropertyNames()) {
-				documentTerms.put(key, DecodeList.decode(properties.get(key).toString()));
+				documentTerms.put(key, ContainerDecoder.decodeList(properties.get(key).toString()));
 			}
 		} catch (IOException e) { e.printStackTrace(); }
 		
-		System.out.println("Calculating TF for each term...");
+		System.out.println("Calculating frequency for each term...");
 		
 		for(String entry : documentTerms.keySet()) {
 			for(String term : documentTerms.get(entry)) {
@@ -36,20 +36,29 @@ public class calculateTF {
 				if(termTFs.containsKey(term)) {
 					//This word has already appeared in this specific document
 					if(termTFs.get(term).containsKey(entry)) {
-						int increment = termTFs.get(term).get(entry).intValue();
+						double increment = termTFs.get(term).get(entry).doubleValue();
 						termTFs.get(term).put(entry, ++increment);
 					}
 					//This word has not appeared in this specific document yet.
 					else {
-						termTFs.get(term).put(entry, 1);
+						termTFs.get(term).put(entry, 1.0);
 					}
 				}
 				//This word has not appeared before in any document
 				else {
-					HashMap<String, Integer> firstValue = new HashMap<String, Integer>();
-					firstValue.put(entry, 1);
+					HashMap<String, Double> firstValue = new HashMap<String, Double>();
+					firstValue.put(entry, 1.0);
 					termTFs.put(term, firstValue);
 				}
+			}
+		}
+		
+		System.out.println("Calculating TF value for each term...");
+		
+		for(String term : termTFs.keySet()) {
+			for(String document : termTFs.get(term).keySet()) {
+				double TF_IDF = 1.0 + Math.log10(termTFs.get(term).get(document).doubleValue());
+				termTFs.get(term).put(document, TF_IDF);
 			}
 		}
 		

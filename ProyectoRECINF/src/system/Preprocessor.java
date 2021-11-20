@@ -11,7 +11,7 @@ public class Preprocessor {
 	public static void loadFilters() {
 		filters.add(new ToLowerCaseFilter());
 		filters.add(new StopWordRemovalFilter());
-		filters.add(new CharacterRemovalFilter("[\\(:,\\.;\\?¿¡!…\"'<>\\)]", " "));
+		filters.add(new CharacterRemovalFilter("[:,\\.;\\?¿¡!…\"'<>\\(\\)\\[\\]\\{\\}]", " "));
 		filters.add(new CharacterRemovalFilter("\\b\\d+\\b", " "));
 		filters.add(new StemmerFilter());
 		filters.add(new CharacterRemovalFilter("\\b.{1,2}\\b", " "));
