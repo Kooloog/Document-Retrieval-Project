@@ -65,7 +65,7 @@ public class getTF_IDFs {
 			count = 0;
 			for(String term : termTFs.keySet()) {
 				StringBuilder sb = new StringBuilder();
-				sb.append(term + "-" + IDFList.get(count) + ":[");
+				sb.append(term + ":[");
 				
 				for(String document : termTFs.get(term).keySet()) {
 					sb.append("{" + document + ":" + termTFs.get(term).get(document).doubleValue() + "}, ");
