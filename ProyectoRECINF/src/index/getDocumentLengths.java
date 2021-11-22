@@ -29,7 +29,7 @@ public class getDocumentLengths {
 	}
 	
 	public static void main(String[] args) {
-		System.out.println("Reading TF-IDF.txt to get document lengths");
+		System.out.println("Reading TF-IDF.txt to get document lengths...");
 		
 		try {
 			Properties properties = new Properties();
@@ -40,7 +40,7 @@ public class getDocumentLengths {
 			}
 		} catch (IOException e) { e.printStackTrace(); }
 		
-		System.out.println("Calculating length for each document...");
+		System.out.println("Calculating length for each document (this may take a while)...");
 		
 		for(String term : termTFIDFs.keySet()) {
 			for(String document : termTFIDFs.get(term).keySet()) {

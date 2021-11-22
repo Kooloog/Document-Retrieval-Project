@@ -20,7 +20,7 @@ public class GetWordsInDocuments {
 		
 		Preprocessor.loadFilters();
 		
-		System.out.println("Reading files from corpus folder and applying filters...");
+		System.out.println("Reading files from corpus folder and applying filters (this may take a while)...");
 		
 		for (File file : corpusFolder.listFiles()) {
 			try {
