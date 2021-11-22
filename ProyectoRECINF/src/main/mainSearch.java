@@ -147,7 +147,6 @@ public class mainSearch {
 						System.out.println("-------------------------------------------------------------");
 						System.out.print("Enter 1 to show 10 more results, or anything else to do another search: ");
 						search = getSearchInput.nextLine();
-						System.out.println(search);
 						
 						if(search.isEmpty()) break;
 						else if(search.charAt(0) == '1') {
