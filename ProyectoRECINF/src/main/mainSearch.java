@@ -16,9 +16,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 import index.*;
-import system.ContainerDecoder;
-import system.Preprocessor;
-import system.RankMap;
+import system.*;
 
 public class mainSearch {
 	
@@ -77,7 +75,6 @@ public class mainSearch {
 		reader.close();
 		
 		while(true) {	
-			//Asking user for search input
 			while(search == null) {
 				System.out.println("-------------------------------------------------------------");
 				System.out.print("Your search (leave empty to exit): ");

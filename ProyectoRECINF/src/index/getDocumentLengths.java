@@ -15,7 +15,6 @@ public class getDocumentLengths {
 	
 	public static HashMap<String, Double> documentLengths = new HashMap<String, Double>();
 	
-	//Calculate length of a specific document
 	public static Double getLengthOfDocument(String documentToFind) {
 		double length = 0;
 		
