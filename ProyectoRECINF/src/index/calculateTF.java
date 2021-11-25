@@ -37,7 +37,7 @@ public class calculateTF {
 					//This word has already appeared in this specific document
 					if(termTFs.get(term).containsKey(entry)) {
 						double increment = termTFs.get(term).get(entry).doubleValue();
-						termTFs.get(term).put(entry, ++increment);
+						termTFs.get(term).put(entry, increment+1.0);
 					}
 					//This word has not appeared in this specific document yet.
 					else {
@@ -57,7 +57,7 @@ public class calculateTF {
 		
 		for(String term : termTFs.keySet()) {
 			for(String document : termTFs.get(term).keySet()) {
-				double TF_IDF = 1.0 + Math.log10(termTFs.get(term).get(document).doubleValue());
+				double TF_IDF = 1.0 + (Math.log(termTFs.get(term).get(document).doubleValue()) / Math.log(2));
 				termTFs.get(term).put(document, TF_IDF);
 			}
 		}
@@ -73,7 +73,7 @@ public class calculateTF {
 				sb.append(term).append(":[");
 				
 				for(String document : termTFs.get(term).keySet()) {
-					sb.append("{" + document + ":" + termTFs.get(term).get(document).intValue() + "}, ");
+					sb.append("{" + document + ":" + termTFs.get(term).get(document).doubleValue() + "}, ");
 				}
 				
 				sb.append("]");

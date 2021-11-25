@@ -20,7 +20,7 @@ public class getDocumentLengths {
 		
 		for(String term : termTFIDFs.keySet()) {
 			if(termTFIDFs.get(term).containsKey(documentToFind)) {
-				length += Math.pow(termTFIDFs.get(term).get(documentToFind), 2);
+				length += Math.pow(termTFIDFs.get(term).get(documentToFind), 2.0);
 			}
 		}
 		

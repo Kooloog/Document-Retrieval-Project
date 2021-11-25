@@ -112,7 +112,7 @@ public class mainSearch {
 			
 			if(!documentsAndScore.isEmpty()) {
 				for(String document : documentsAndScore.keySet()) {
-					double finalScore = documentsAndScore.get(document).doubleValue() / documentLengths.get(document);
+					double finalScore = documentsAndScore.get(document).doubleValue() / documentLengths.get(document).doubleValue();
 					documentsAndScore.put(document, finalScore);
 				}
 				

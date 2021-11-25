@@ -30,9 +30,9 @@ public class calculateIDF {
 		
 		System.out.println("Calculating IDF for each term...");
 		
-		int numberOfDocuments = new File("corpus").list().length;
+		double numberOfDocuments = new File("corpus").list().length;
 		for(String document : termTFs.keySet()) {
-			double IDF = Math.log10(numberOfDocuments / termTFs.get(document).size());
+			double IDF = (Math.log(numberOfDocuments / termTFs.get(document).size()) / Math.log(2));
 			termIDFs.put(document, IDF);
 		}
 		
