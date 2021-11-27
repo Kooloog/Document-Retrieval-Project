@@ -7,10 +7,10 @@ import java.util.ArrayList;
 
 public class StopWordRemovalFilter implements Filter {
 
-	@Override
-	public String execute(String content) {
+	public static ArrayList<String> lines = new ArrayList<String>();
+	
+	public static void loadStopWords() {
 		File stopWordsFile = new File("stopwords.txt");
-		ArrayList<String> lines = new ArrayList<String>();
 		String line;
 		
 		try (BufferedReader br = new BufferedReader(new FileReader(stopWordsFile))) {
@@ -20,6 +20,10 @@ public class StopWordRemovalFilter implements Filter {
 		} catch (Exception e) {
 			e.printStackTrace();
 		}
+	}
+	
+	@Override
+	public String execute(String content) {
 		
 		String[] wordlist = content.split("\\W+");
 		StringBuilder sb = new StringBuilder();

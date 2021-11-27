@@ -15,18 +15,6 @@ public class getDocumentLengths {
 	
 	public static HashMap<String, Double> documentLengths = new HashMap<String, Double>();
 	
-	public static Double getLengthOfDocument(String documentToFind) {
-		double length = 0;
-		
-		for(String term : termTFIDFs.keySet()) {
-			if(termTFIDFs.get(term).containsKey(documentToFind)) {
-				length += Math.pow(termTFIDFs.get(term).get(documentToFind), 2.0);
-			}
-		}
-		
-		return Math.sqrt(length);
-	}
-	
 	public static void main(String[] args) {
 		System.out.println("Reading TF-IDF.txt to get document lengths...");
 		
@@ -44,7 +32,12 @@ public class getDocumentLengths {
 		for(String term : termTFIDFs.keySet()) {
 			for(String document : termTFIDFs.get(term).keySet()) {
 				if(!documentLengths.containsKey(document)) {
-					documentLengths.put(document, getLengthOfDocument(document));
+					documentLengths.put(document, Math.pow(termTFIDFs.get(term).get(document), 2.0));
+				}
+				else {
+					double currentLength = documentLengths.get(document);
+					currentLength += Math.pow(termTFIDFs.get(term).get(document), 2.0);
+					documentLengths.put(document, currentLength);
 				}
 			}
 		}
@@ -56,7 +49,7 @@ public class getDocumentLengths {
 			writer = new BufferedWriter(new FileWriter("infofiles/documentLengths.txt"));
 			
 			for(String document : documentLengths.keySet()) {
-				writer.write(document + ":" + documentLengths.get(document));
+				writer.write(document + ":" + Math.sqrt(documentLengths.get(document)));
 				writer.newLine();
 			}
 			
