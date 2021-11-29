@@ -27,7 +27,7 @@ public class getDocumentLengths {
 			}
 		} catch (IOException e) { e.printStackTrace(); }
 		
-		System.out.println("Calculating length for each document (this may take a while)...");
+		System.out.println("Calculating length for each document...");
 		
 		for(String term : termTFIDFs.keySet()) {
 			for(String document : termTFIDFs.get(term).keySet()) {

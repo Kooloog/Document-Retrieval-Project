@@ -21,15 +21,23 @@ public class GetWordsInDocuments {
 		Preprocessor.loadFilters();
 		
 		System.out.println("Reading files from corpus folder and applying filters (this may take a while)...");
+		System.out.println("-------------------------------------------------------------");
 		
+		int cont = 0;
 		for (File file : corpusFolder.listFiles()) {
 			try {
 				fileContents = new String(Files.readAllBytes(Paths.get(file.toURI())));
 			} catch (IOException e) { e.printStackTrace(); }
 			
 			indexTerms.put(file.getName(), Preprocessor.preprocess(fileContents));
+			if(cont % 1000 == 0) {
+				System.out.println("Progress: " + cont + "/29529");
+			}
+			cont++;
 		}
 		
+		System.out.println("Progress: 29529/29529");
+		System.out.println("-------------------------------------------------------------");
 		System.out.println("Saving preprocessed terms to file documentsAndTerms.txt");
 		
 	    BufferedWriter writer;
